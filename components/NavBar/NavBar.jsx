@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import styled from 'styled-components'
 
-import { themeColors, themeModule } from '../../theme/theme.styled'
+import { themeColors } from '../../theme/theme.styled'
 
 const StyledNavBar = styled.nav`
     background-color: ${themeColors.secondary};

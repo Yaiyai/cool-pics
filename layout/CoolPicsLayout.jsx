@@ -2,7 +2,6 @@ import React from 'react'
 import Head from 'next/head'
 import NavBar from '../components/NavBar/NavBar'
 import Footer from '../components/Footer/Footer'
-import Container from '../components/_ui/Container/Container'
 
 const CoolPicsLayout = ({ children }) => {
     return (
@@ -15,10 +14,7 @@ const CoolPicsLayout = ({ children }) => {
                 <title>CoolPics || Cool Pics</title>
             </Head>
             <NavBar />
-            <Container>
-
                 <main>{ children }</main>
-            </Container>
             <Footer />
         </>
     )

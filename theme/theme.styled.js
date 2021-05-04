@@ -1,10 +1,23 @@
 export const themeColors = {
-	primary: '#BCE0FD',
+	primary: '#7FC4FD',
 	secondary: '#000000',
 	gray: '#666666',
+	lightGray: '#EEEEEE',
+	midGray: '#AAAAAA',
 }
 
-export const themeModule = '24px'
+export const themeFont = {
+	family: `'Roboto', sans-serif`,
+	weight: {
+		light: '300',
+		normal: '400',
+		semiBold: '700',
+		bold: '900',
+	},
+	sizes: {
+		normal: '1rem',
+	},
+}
 
 export const themeBreakpoints = {
 	xxsDown: '375px',

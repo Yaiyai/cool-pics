@@ -8,7 +8,6 @@ const StyledContainer = styled.div`
 	padding-left: 0;
 	padding-right: 0;
 	margin: 0 auto;
-    background-color:pink;
     height: 1000px;
     @media (min-width: ${themeBreakpoints.xxlUp}) {
         max-width: 1400px;
