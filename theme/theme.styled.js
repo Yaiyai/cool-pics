@@ -16,6 +16,7 @@ export const themeFont = {
 	},
 	sizes: {
 		normal: '1rem',
+		h1: 'calc(1rem * 4)',
 	},
 }
 

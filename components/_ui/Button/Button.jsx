@@ -15,6 +15,11 @@ const StyledButton = styled.button`
     font-weight: ${themeFont.weight.normal};
     font-size: ${themeFont.sizes.normal};
     background-color: ${({ buttonStyle }) => buttonStyle === 'secondary' ? `${themeColors.gray}` : `${themeColors.primary}`};
+    
+    &:hover{
+        background-color: ${({ buttonStyle }) => buttonStyle === 'secondary' ? `${themeColors.gray}` : `#BCE0FD`};
+
+    }
 `
 
 const Button = ({ literal, method, buttonStyle }) => {
