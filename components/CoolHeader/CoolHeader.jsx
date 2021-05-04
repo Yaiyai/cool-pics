@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Container from '../_ui/Container/Container'
 import Button from '../_ui/Button/Button'
 import { themeColors, themeFont } from '../../theme/theme.styled'
+import HeaderCard from '../_ui/HeaderCard/HeaderCard'
 
 const HeaderSection = styled.header`
     background-color: black;
@@ -24,6 +25,7 @@ const LeftSection = styled.section`
 `
 const RightSection = styled.section`
     width: 50%;
+    position:relative;
 `
 
 const MainTitle = styled.h1`
@@ -54,7 +56,7 @@ const CoolHeader = ({ title, subtitle, buttonLiteral, buttonMethod }) => {
                     <Button literal={ buttonLiteral } method={ buttonMethod } buttonStyle="primary" />
                 </LeftSection>
                 <RightSection>
-                    tightt
+                    <HeaderCard />
                 </RightSection>
             </Container>
         </HeaderSection>
