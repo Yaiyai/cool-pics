@@ -14,6 +14,7 @@ const HeaderSection = styled.header`
     color: white;
     font-family: ${themeFont.family};
     border-radius: 0px 0px 40px 40px;
+    margin-bottom: 144px;
     > div{
         display: flex;
     }

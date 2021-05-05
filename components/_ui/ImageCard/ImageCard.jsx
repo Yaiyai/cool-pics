@@ -28,6 +28,7 @@ const StyledImageCard = styled.article`
     background-repeat: no-repeat;
     background-position: center center;
     border: 1px solid #EEEEEE;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     box-sizing: border-box;
     margin-bottom: 24px;
     position: relative;
