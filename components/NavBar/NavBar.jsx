@@ -7,16 +7,13 @@ import { themeColors } from '../../theme/theme.styled'
 
 const StyledNavBar = styled.nav`
     background-color: ${themeColors.secondary};
-    position: ${({ scroll }) => (scroll ? `fixed` : `static`)};
+    position: fixed;
     padding: ${({ scroll }) => (scroll ? `17px 0 17px 32px` : `24px 0 23px 32px`)};
     color: white;
     z-index: 5;
-    ${({ scroll }) => (scroll && `
-            top:0;
-            left:0;
-            right:0;
-        `
-    )};
+    top:0;
+    left:0;
+    right:0;
 `
 
 const NavBar = () => {

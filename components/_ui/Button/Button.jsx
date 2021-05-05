@@ -33,7 +33,6 @@ const Button = ({ literal, method, buttonStyle }) => {
 
 Button.propTypes = {
     literal: PropTypes.string.isRequired,
-    method: PropTypes.func.isRequired,
     buttonStyle: PropTypes.string,
 }
 
