@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import CoolHeader from '../components/CoolHeader/CoolHeader'
 import ImageGrid from '../components/ImageGrid/ImageGrid'
 import Button from '../components/_ui/Button/Button'
@@ -7,7 +7,16 @@ import CoolPicsLayout from '../layout/CoolPicsLayout'
 import { getPictures } from './api/picsum.api'
 
 const Home = ({ firstPictures }) => {
-  const starHereButton = () => alert('hola')
+
+  const [cleanImages, setCleanImages] = useState()
+
+  useEffect(() => {
+    const auxImages = []
+    firstPictures.forEach((pix, idx) => {
+      auxImages.push({ author: pix.author, order: idx + 1 < 10 ? `#0${idx + 1}` : `#${idx + 1}`, url: `https://picsum.photos/id/${pix.id}/400/?random=2` })
+    })
+    setCleanImages(auxImages)
+  }, [])
 
   return (
     <CoolPicsLayout>
@@ -15,9 +24,8 @@ const Home = ({ firstPictures }) => {
         title="Are you bored?"
         subtitle="CoolPics helps you to spend hours of your day scrolling down and sharing a big list of random images. "
         buttonLiteral="Start Here"
-        buttonMethod={ starHereButton }
       />
-      <ImageGrid allImages={ firstPictures } />
+      {cleanImages?.length && <ImageGrid allImages={ cleanImages } /> }
     </CoolPicsLayout>
   )
 }

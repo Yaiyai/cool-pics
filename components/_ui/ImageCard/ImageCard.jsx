@@ -38,6 +38,10 @@ const StyledImageCard = styled.article`
     display:flex;
     align-items:flex-start;
     justify-content: flex-end;
+    margin-right:24px;
+    &:nth-child(3n){
+        margin-right:0;
+    }
 
     &:hover{
         p{
@@ -81,9 +85,9 @@ const InfoId = styled.p`
 
 
 
-const ImageCard = ({ imageUrl, author, picId }) => {
+const ImageCard = ({ imageUrl, author, picId, style }) => {
     return (
-        <StyledImageCard imageUrl={ imageUrl }>
+        <StyledImageCard imageUrl={ style ? `${imageUrl}&${style}` : `${imageUrl}` }>
             <InfoId>{ picId }</InfoId>
             <InfoHover>{ author }</InfoHover>
         </StyledImageCard>

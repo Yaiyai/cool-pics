@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import ImageCard from '../_ui/ImageCard/ImageCard'
 import H2 from '../_ui/Titles/H2'
 import Button from '../_ui/Button/Button'
 import { themeFont } from '../../theme/theme.styled'
+
 const StyledContainer = styled.div`
     width: 100%;
-    max-width: 1200px;
+    max-width: 1209px;
 	margin: 0 auto;
     display:flex;
     flex-direction: column;
@@ -17,7 +18,6 @@ const Grid = styled.section`
     display: flex;
     align-items:center;
     flex-wrap:wrap;
-    justify-content: space-between;
     padding: 40px 0 48px;
     + button{
         background: #FFFFFF;
@@ -28,12 +28,16 @@ const Grid = styled.section`
         margin-bottom: 144px;
         align-self: center;
     }
-
 `
+
 const ActionGroup = styled.article`
     display:flex;
     align-items: center;
     margin-top: 39px;
+    button{
+        margin-right: 16px;
+        width:140px;
+    }
 `
 
 const SearchInput = styled.input`
@@ -44,6 +48,7 @@ const SearchInput = styled.input`
     padding: 18px 24px;
     width: 400px;
     font-family: ${themeFont.family};
+    margin-right: 32px;
     &::placeholder{
         font-family: ${themeFont.family};
         font-size: 16px;
@@ -53,14 +58,31 @@ const SearchInput = styled.input`
 `
 
 const ImageGrid = ({ allImages }) => {
+    const [currentStyle, setCurrentStyle] = useState('')
     const [gridState, setGridState] = useState({ images: allImages })
     const [counter, setCounter] = useState(9)
 
+    const [searchItem, setSearchItem] = useState('')
+
+    const handleInputChange = (e) => {
+        setSearchItem(e.target.value)
+    }
+
+    // useEffect(() => {
+    //     const searchingImages = allImages.filter(pic => pic.author.toLowerCase().includes(searchItem))
+    //     setGridState(gridState => ({ ...gridState, imagesToShow: searchingImages }))
+    // }, [searchItem])
+
     useEffect(() => {
+        setFirstImages()
+    }, [])
+
+    const setFirstImages = () => {
         const copyImages = [...allImages]
         const firstCut = copyImages.splice(0, 9)
         setGridState(gridState => ({ ...gridState, imagesToShow: firstCut }))
-    }, [])
+
+    }
 
     const morePictures = () => {
         const copyImages = [...allImages]
@@ -69,21 +91,40 @@ const ImageGrid = ({ allImages }) => {
         setCounter(counter => counter + 9)
     }
 
-    const changePicStyleToColor = () => {
-        alert('color')
+    const changePicStyleToColor = useCallback(() => {
+        setCurrentStyle('')
+    }, [])
+
+    const changePicStyleToGray = useCallback(() => {
+        setCurrentStyle('grayscale')
+    }, [])
+
+    const changePicStyleToBlur = useCallback(() => {
+        setCurrentStyle('blur')
+    }, [])
+
+    const handleSubmit = () => {
+        if (searchItem) {
+            const searchingImages = allImages.filter(pic => pic.author.toLowerCase().includes(searchItem))
+            setGridState(gridState => ({ ...gridState, imagesToShow: searchingImages }))
+        } else {
+            setFirstImages()
+        }
     }
-    const changePicStyleToGray = () => {
-        alert('gray')
-    }
-    const changePicStyleToBlur = () => {
-        alert('blur')
+
+    const handleKeySubmit = (e) => {
+        if (event.key === 'Enter') {
+            handleSubmit(e)
+        }
+
     }
 
     return (
         <StyledContainer>
             <H2 title="Random Images" />
+
             <ActionGroup>
-                <SearchInput placeholder='Search by author' />
+                <SearchInput type="text" placeholder='Search by author' onChange={ handleInputChange } value={ searchItem } onKeyDown={ handleKeySubmit } />
                 <Button literal="Color" method={ changePicStyleToColor } buttonStyle="primary" />
                 <Button literal="Grayscale" method={ changePicStyleToGray } buttonStyle="secondary" />
                 <Button literal="Blur" method={ changePicStyleToBlur } buttonStyle="secondary" />
@@ -92,10 +133,11 @@ const ImageGrid = ({ allImages }) => {
             <Grid>
                 {
                     gridState?.imagesToShow?.map((pic, idx) => <ImageCard
-                        key={ pic.id }
-                        picId={ idx + 1 < 10 ? `#0${idx + 1}` : `#${idx + 1}` }
+                        key={ pic.order }
+                        picId={ pic.order }
                         author={ pic.author }
-                        imageUrl={ `https://picsum.photos/id/${pic.id}/400/?random=1` }
+                        imageUrl={ pic.url }
+                        style={ currentStyle }
                     />
                     )
                 }

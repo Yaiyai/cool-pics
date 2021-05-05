@@ -14,7 +14,7 @@ const StyledButton = styled.button`
     font-family: ${themeFont.family};
     font-weight: ${themeFont.weight.normal};
     font-size: ${themeFont.sizes.normal};
-    background-color: ${({ buttonStyle }) => buttonStyle === 'secondary' ? `${themeColors.gray}` : `${themeColors.primary}`};
+    background-color: ${({ buttonStyle }) => buttonStyle === 'secondary' ? `black` : `${themeColors.primary}`};
     
     &:hover{
         background-color: ${({ buttonStyle }) => buttonStyle === 'secondary' ? `${themeColors.gray}` : `#BCE0FD`};
