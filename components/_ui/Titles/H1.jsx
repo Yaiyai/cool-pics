@@ -3,24 +3,24 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { themeFont } from '../../../theme/theme.styled'
 
-const StyledH2 = styled.h2`
+const StyledH1 = styled.h2`
     font-family: ${themeFont.family};
     font-weight: ${themeFont.weight.normal};
     font-size: ${themeFont.sizes.h2};
     text-align: ${({ align }) => align ? `${align}` : `left`}
 `
 
-const H2 = ({ title, align }) => {
+const H1 = ({ title, align }) => {
     return (
-        <StyledH2 align={ align }>
+        <StyledH1 align={ align }>
             {title }
-        </StyledH2>
+        </StyledH1>
     )
 }
 
-H2.propTypes = {
+H1.propTypes = {
     title: PropTypes.string.isRequired,
     align: PropTypes.string
 }
 
-export default H2
+export default H1
