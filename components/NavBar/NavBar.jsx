@@ -10,7 +10,6 @@ const StyledNavBar = styled.nav`
     position: ${({ scroll }) => (scroll ? `fixed` : `static`)};
     padding: ${({ scroll }) => (scroll ? `17px 0 17px 32px` : `24px 0 23px 32px`)};
     color: white;
-    width: 100vw;
     z-index: 5;
     ${({ scroll }) => (scroll && `
             top:0;

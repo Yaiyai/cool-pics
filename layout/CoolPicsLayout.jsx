@@ -14,8 +14,7 @@ const CoolPicsLayout = ({ children }) => {
                 <title>CoolPics || Cool Pics</title>
             </Head>
             <NavBar />
-                <main>{ children }</main>
-            <Footer />
+            <main>{ children }</main>
         </>
     )
 }

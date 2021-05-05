@@ -13,6 +13,7 @@ const HeaderSection = styled.header`
     padding: 242px 0;
     color: white;
     font-family: ${themeFont.family};
+    border-radius: 0px 0px 40px 40px;
     > div{
         display: flex;
     }
