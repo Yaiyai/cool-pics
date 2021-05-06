@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import CoolHeader from '../components/CoolHeader/CoolHeader'
 import ImageGrid from '../components/ImageGrid/ImageGrid'
 import Button from '../components/_ui/Button/Button'
@@ -6,17 +6,7 @@ import ImageCard from '../components/_ui/ImageCard/ImageCard'
 import CoolPicsLayout from '../layout/CoolPicsLayout'
 import { getPictures } from './api/picsum.api'
 
-const Home = ({ firstPictures }) => {
-
-  const [cleanImages, setCleanImages] = useState()
-
-  useEffect(() => {
-    const auxImages = []
-    firstPictures.forEach((pix, idx) => {
-      auxImages.push({ author: pix.author, order: idx + 1 < 10 ? `#0${idx + 1}` : `#${idx + 1}`, url: `https://picsum.photos/id/${pix.id}/400/?random=2` })
-    })
-    setCleanImages(auxImages)
-  }, [])
+const Home = ({ cleanImages }) => {
 
   return (
     <CoolPicsLayout>
@@ -32,8 +22,13 @@ const Home = ({ firstPictures }) => {
 
 export const getStaticProps = async () => {
   const firstPictures = await getPictures()
+  const cleanImages = []
 
-  return { props: { firstPictures } }
+  firstPictures.forEach((pix, idx) => {
+    cleanImages.push({ author: pix.author, order: idx + 1 < 10 ? `#0${idx + 1}` : `#${idx + 1}`, url: `https://picsum.photos/id/${pix.id}/400/?random=2` })
+  })
+
+  return { props: { cleanImages } }
 }
 
 

@@ -1,12 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import Container from '../_ui/Container/Container'
 import Button from '../_ui/Button/Button'
 import { themeColors, themeFont } from '../../theme/theme.styled'
 import HeaderCard from '../_ui/HeaderCard/HeaderCard'
 
-const HeaderSection = styled.header`
+const HeaderSection = styled.section`
     background-color: black;
     position: relative;
     display: flex;
@@ -19,6 +18,13 @@ const HeaderSection = styled.header`
         display: flex;
     }
 `
+const StyledContainer = styled.div`
+    width: 100%;
+    max-width: 1209px;
+	margin: 0 auto;
+    display:flex;
+`
+
 const LeftSection = styled.section`
     width: 50%;
     button{
@@ -51,7 +57,7 @@ const SecondTitle = styled.h2`
 const CoolHeader = ({ title, subtitle, buttonLiteral, buttonMethod }) => {
     return (
         <HeaderSection>
-            <Container>
+            <StyledContainer>
                 <LeftSection>
                     <MainTitle>{ title }</MainTitle>
                     <SecondTitle>{ subtitle }</SecondTitle>
@@ -60,7 +66,7 @@ const CoolHeader = ({ title, subtitle, buttonLiteral, buttonMethod }) => {
                 <RightSection>
                     <HeaderCard />
                 </RightSection>
-            </Container>
+            </StyledContainer>
         </HeaderSection>
     )
 }

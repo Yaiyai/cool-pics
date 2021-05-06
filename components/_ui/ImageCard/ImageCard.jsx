@@ -85,14 +85,14 @@ const InfoId = styled.p`
 
 
 
-const ImageCard = ({ imageUrl, author, picId, style }) => {
+const ImageCard = React.memo(({ imageUrl, author, picId, style }) => {
     return (
         <StyledImageCard imageUrl={ style ? `${imageUrl}&${style}` : `${imageUrl}` }>
             <InfoId>{ picId }</InfoId>
             <InfoHover>{ author }</InfoHover>
         </StyledImageCard>
     )
-}
+})
 
 ImageCard.propTypes = {
     imageUrl: PropTypes.string.isRequired,

@@ -20,10 +20,6 @@ const Grid = styled.section`
     flex-wrap:wrap;
     padding: 40px 0 48px;
     + button{
-        background: #FFFFFF;
-        border: 1px solid #111111;
-        box-sizing: border-box;
-        border-radius: 8px;
         width: 300px;
         margin-bottom: 144px;
         align-self: center;
@@ -58,30 +54,20 @@ const SearchInput = styled.input`
 `
 
 const ImageGrid = ({ allImages }) => {
+    const [gridState, setGridState] = useState({})
+
     const [currentStyle, setCurrentStyle] = useState('')
-    const [gridState, setGridState] = useState({ images: allImages })
-    const [counter, setCounter] = useState(9)
 
     const [searchItem, setSearchItem] = useState('')
 
-    const handleInputChange = (e) => {
-        setSearchItem(e.target.value)
-    }
-
-    // useEffect(() => {
-    //     const searchingImages = allImages.filter(pic => pic.author.toLowerCase().includes(searchItem))
-    //     setGridState(gridState => ({ ...gridState, imagesToShow: searchingImages }))
-    // }, [searchItem])
-
-    useEffect(() => {
-        setFirstImages()
-    }, [])
+    //Images Methods
+    // // Each time more images are loaded, the counter is increased by 9 units for reference in the initial image array. The initial count is the number of images required in the first load.
+    const [counter, setCounter] = useState(9)
 
     const setFirstImages = () => {
         const copyImages = [...allImages]
         const firstCut = copyImages.splice(0, 9)
         setGridState(gridState => ({ ...gridState, imagesToShow: firstCut }))
-
     }
 
     const morePictures = () => {
@@ -103,6 +89,12 @@ const ImageGrid = ({ allImages }) => {
         setCurrentStyle('blur')
     }, [])
 
+
+    //Input methods
+    const handleInputChange = (e) => {
+        setSearchItem(e.target.value)
+    }
+
     const handleSubmit = () => {
         if (searchItem) {
             const searchingImages = allImages.filter(pic => pic.author.toLowerCase().includes(searchItem))
@@ -116,8 +108,13 @@ const ImageGrid = ({ allImages }) => {
         if (event.key === 'Enter') {
             handleSubmit(e)
         }
-
     }
+
+
+    useEffect(() => {
+        setFirstImages()
+    }, [])
+
 
     return (
         <StyledContainer>
@@ -142,7 +139,7 @@ const ImageGrid = ({ allImages }) => {
                     )
                 }
             </Grid>
-            <Button literal="Load More" method={ morePictures } buttonStyle="primary" />
+            <Button literal="Load More" method={ morePictures } buttonStyle="outlined" />
         </StyledContainer>
     )
 }
