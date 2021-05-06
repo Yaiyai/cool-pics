@@ -17,23 +17,68 @@ const HeaderSection = styled.section`
     > div{
         display: flex;
     }
-`
+    @media (max-width: 575px) {
+        padding-top:106px;
+        padding-bottom: 294px;
+    };
+    `
 const StyledContainer = styled.div`
     width: 100%;
-    max-width: 1209px;
 	margin: 0 auto;
     display:flex;
-`
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+    align-items: flex-start;
+    @media (min-width: 1300px) {
+        max-width: 1209px;
+    };
+    @media (min-width: 1199px) and (max-width: 1299px) {
+        max-width: 1150px;
+    }
+    @media (min-width: 992px) and (max-width: 1199px) {
+        max-width: 920px;
+    }
+    @media (min-width: 769px) and (max-width: 991px) {
+        max-width: 750px;
+    }
+    @media (min-width: 576px) and (max-width: 768px) {
+        max-width: 530px;
+    }
+    @media (min-width: 400px) and (max-width: 575px) {
+        max-width: 382px;
+    };
+    @media (max-width: 399px) {
+        max-width: 300px;
+    };
+    
+    `
 
 const LeftSection = styled.section`
     width: 50%;
     button{
         width: 300px;
+        @media (max-width: 575px) {
+            width: 200px;
+            padding: 15px 0 14px;
+        }
     }
+    @media (max-width: 575px) {
+        width:100%;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+        margin-bottom: 36px;
+    };
+    
 `
 const RightSection = styled.section`
     width: 50%;
     position:relative;
+    @media (max-width: 575px) {
+        width:100%;
+    };
 `
 
 const MainTitle = styled.h1`
@@ -42,6 +87,11 @@ const MainTitle = styled.h1`
     font-size: ${themeFont.sizes.h1};
     line-height: 76px;
     margin-bottom: 32px;
+    @media (max-width: 575px) {
+        font-size: 32px;
+        line-height: 38px;
+    };
+
 `
 const SecondTitle = styled.h2`
     color: ${themeColors.lightGray};
@@ -50,6 +100,11 @@ const SecondTitle = styled.h2`
     width: 350px;
     line-height: 19px;
     margin-bottom: 40px;
+    @media (max-width: 575px) {
+        font-size: 16px;
+        line-height: 19px;
+    };
+
 
 `
 

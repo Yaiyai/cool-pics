@@ -28,6 +28,11 @@ const RotatedImage = styled.div`
         top: 30px;
         left: 30px;
     }
+    @media (max-width: 768px) {
+        width:252.35px;
+        height:252.35px;
+        top:36px;
+    }
 `
 
 const StyledDogFigure = styled.figure`
@@ -46,6 +51,10 @@ const StyledDogFigure = styled.figure`
             height: 315px;
             object-fit: cover;
             object-position: center;
+            @media (max-width: 768px) {
+                width:189.26px;
+                height:189.26px;
+            }
         }
 `
 

@@ -7,14 +7,18 @@ import { themeColors, themeFont } from '../../../theme/theme.styled'
 const StyledButton = styled.button`
     outline: none;
     border: none;
-    padding: 18px 20px;
+    padding-top:18px;
+    padding-bottom:18px;
     border-radius: 8px;
     text-transform: uppercase;
     font-family: ${themeFont.family};
     font-weight: ${themeFont.weight.normal};
     font-size: ${themeFont.sizes.normal};
     box-sizing: border-box;
-
+    @media (max-width: 768px) {
+        padding-top:12px;
+        padding-bottom:12px;
+    }
 `
 
 const PrimaryButton = styled(StyledButton)`
@@ -23,12 +27,13 @@ const PrimaryButton = styled(StyledButton)`
     &:hover{
         background-color: #BCE0FD;
     }
-`
+    `
 const SecondaryButton = styled(StyledButton)`
-    color: white;
-    background-color: black;
+    color: ${({ active }) => active ? `black` : `white`};;
+    background-color: ${({ active }) => active ? `${themeColors.primary}` : `black`};
     &:hover{
         background-color: ${themeColors.gray};
+        color: white;
     }
 `
 const OutlinedButton = styled(StyledButton)`
@@ -36,12 +41,12 @@ const OutlinedButton = styled(StyledButton)`
     border: 1px solid #111111;
 `
 
-const Button = React.memo(({ literal, method, buttonStyle }) => {
+const Button = React.memo(({ literal, method, buttonStyle, active }) => {
 
     const styledButtons = {
-        primary: <PrimaryButton onClick={ method }>{ literal }</PrimaryButton>,
-        secondary: <SecondaryButton onClick={ method }>{ literal }</SecondaryButton>,
-        outlined: <OutlinedButton onClick={ method }>{ literal }</OutlinedButton>
+        primary: <PrimaryButton active={ active } onClick={ method }>{ literal }</PrimaryButton>,
+        secondary: <SecondaryButton active={ active } onClick={ method }>{ literal }</SecondaryButton>,
+        outlined: <OutlinedButton active={ active } onClick={ method }>{ literal }</OutlinedButton>
     }
 
     const getButton = (style) => (styledButtons[style] || styledButtons.primary)

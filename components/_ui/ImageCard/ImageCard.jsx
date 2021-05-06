@@ -20,13 +20,34 @@ const fadeOut = keyframes`
     }
 `
 
+const imageUp = keyframes`
+    from{
+        background-position-y:center;
+    }
+    to{
+        background-position-y:-50px;
+    }
+`
+const imageDown = keyframes`
+    from{
+        background-position-y:-50px;
+    }
+    to{
+        background-position-y:center;
+    }
+`
+
 const StyledImageCard = styled.article`
     width: 387px;
     height: 343px;
+
+
     background-image: ${({ imageUrl }) => imageUrl ? `url(${imageUrl})` : `url(assets/perrete.jpg)`};
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position-x: center;
+    animation: ${imageDown} 500ms ease-out;
+    background-position-y: center;
     border: 1px solid #EEEEEE;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     box-sizing: border-box;
@@ -42,16 +63,78 @@ const StyledImageCard = styled.article`
     &:nth-child(3n){
         margin-right:0;
     }
+    @media (max-width: 768px) {
+        animation: none;
+    }
 
     &:hover{
+        animation: ${imageUp} 500ms ease-out;
+        background-position-y:-50px;
+        @media (max-width: 768px) {
+            animation: none;
+            background-position-y:center;
+        }
+
         p{
             &:last-of-type{
                 animation: ${fadeIn} 500ms ease-out;
                 opacity: 1;
+                @media (max-width: 768px) {
+                    animation: none;
+                }
+
             }
         }
     }
-   
+
+    @media (min-width: 1199px) and (max-width: 1299px) {
+        width: 367px;
+        height: 325px;
+    }
+
+    @media (min-width: 992px) and (max-width: 1199px) {
+        width: 290px;
+        height: 257px;
+    }
+
+    @media (min-width: 769px) and (max-width: 991px) {
+        width: 363px;
+        height: 321px;
+        &:nth-child(2n){
+            margin-right:0;
+        }
+        &:nth-child(3n){
+            margin-right:24px;
+        }
+    }
+    @media (min-width: 576px) and (max-width: 768px) {
+        width: 253px;
+        height: 224px;
+        &:nth-child(2n){
+            margin-right:0;
+        }
+        &:nth-child(3n){
+            margin-right:24px;
+        }
+    }
+
+    @media (max-width: 575px) {
+        width: 380px;
+        height: 336.8px;
+        box-shadow:none;
+        filter:none;
+        margin-bottom: 16.2px;
+        &:last-of-type{
+            margin-bottom:0;
+        }
+    }
+    @media (max-width: 399px) {
+        width: 100%;
+        height:266px;
+        margin-right:0;
+    };
+
+  
 `
 
 const InfoHover = styled.p`
@@ -70,6 +153,12 @@ const InfoHover = styled.p`
     font-family: ${themeFont.family};
     font-weight: ${themeFont.weight.normal};
     font-size: ${themeFont.sizes.xl};
+    line-height:28.63px;
+    @media (max-width: 768px) {
+        opacity:1;
+        animation: none;
+    }
+
 `
 
 const InfoId = styled.p`
@@ -81,6 +170,8 @@ const InfoId = styled.p`
     font-family: ${themeFont.family};
     font-weight: ${themeFont.weight.normal};
     font-size: ${themeFont.sizes.xl};
+    line-height:28.63px;
+
 `
 
 

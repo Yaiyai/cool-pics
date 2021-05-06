@@ -4,35 +4,105 @@ import styled from 'styled-components'
 import ImageCard from '../_ui/ImageCard/ImageCard'
 import H2 from '../_ui/Titles/H2'
 import Button from '../_ui/Button/Button'
-import { themeFont } from '../../theme/theme.styled'
+import { themeColors, themeFont } from '../../theme/theme.styled'
+import { IoSearchSharp } from 'react-icons/io5'
 
 const StyledContainer = styled.div`
     width: 100%;
-    max-width: 1209px;
 	margin: 0 auto;
     display:flex;
     flex-direction: column;
     align-items: flex-start;
+    h2{
+        @media (max-width: 575px) {
+            text-align: center;
+            font-size: 32px;
+            line-height: 38.12px;
+        }
+    }
+
+    @media (min-width: 1300px) {
+        max-width: 1209px;
+    };
+    @media (min-width: 1199px) and (max-width: 1299px) {
+        max-width: 1150px;
+    }
+    @media (min-width: 992px) and (max-width: 1199px) {
+        max-width: 920px;
+    }
+    @media (min-width: 769px) and (max-width: 991px) {
+        max-width: 750px;
+    }
+    @media (min-width: 576px) and (max-width: 768px) {
+        max-width: 530px;
+    }
+    @media (max-width: 575px) {
+        max-width: 382px;
+    };
+    @media (max-width: 399px) {
+        max-width: 300px;
+    };
 `
+
 const Grid = styled.section`
     display: flex;
     align-items:center;
     flex-wrap:wrap;
-    padding: 40px 0 48px;
+    padding: 0 0 48px;
     + button{
         width: 300px;
         margin-bottom: 144px;
         align-self: center;
+        @media (max-width: 768px) {
+            width:100%;
+        }
+        
+    }
+    @media (max-width: 768px) {
+        padding-bottom:32.2px;
     }
 `
 
 const ActionGroup = styled.article`
     display:flex;
     align-items: center;
-    margin-top: 39px;
+    padding: 39px 0 40px;
     button{
         margin-right: 16px;
         width:140px;
+        @media (max-width: 768px) {
+            width: 118px;
+            margin-right:14px;
+            &:last-of-type{
+                margin-right: 0;
+            }
+        }
+    }
+    @media (max-width: 768px) {
+        flex-direction:column;
+        padding-bottom: 30px;
+    }
+
+`
+const SearchGroup = styled.div`
+    position:relative;
+    margin-right: 32px;
+    @media (max-width: 768px) {
+        margin-right:0;
+        width: 100%;
+    }
+`
+
+const StyledIcon = styled(IoSearchSharp)`
+    position:absolute;
+    right:15px;
+    top:15px;
+    width: 23.72px;
+    height: 23.72px;
+    color: #AAAAAA;
+    cursor:pointer;
+    &:hover{
+        color: ${themeColors.primary};
     }
 `
 
@@ -44,19 +114,23 @@ const SearchInput = styled.input`
     padding: 18px 24px;
     width: 400px;
     font-family: ${themeFont.family};
-    margin-right: 32px;
     &::placeholder{
         font-family: ${themeFont.family};
         font-size: 16px;
         line-height: 19px;
         color: #AAAAAA;
     }
+    @media (max-width: 768px) {
+        margin-bottom:16px;
+        width: 100%;
+    }
+
 `
 
 const ImageGrid = ({ allImages }) => {
     const [gridState, setGridState] = useState({})
 
-    const [currentStyle, setCurrentStyle] = useState('')
+    const [currentStyle, setCurrentStyle] = useState('color')
 
     const [searchItem, setSearchItem] = useState('')
 
@@ -78,7 +152,7 @@ const ImageGrid = ({ allImages }) => {
     }
 
     const changePicStyleToColor = useCallback(() => {
-        setCurrentStyle('')
+        setCurrentStyle('color')
     }, [])
 
     const changePicStyleToGray = useCallback(() => {
@@ -110,7 +184,6 @@ const ImageGrid = ({ allImages }) => {
         }
     }
 
-
     useEffect(() => {
         setFirstImages()
     }, [])
@@ -121,10 +194,15 @@ const ImageGrid = ({ allImages }) => {
             <H2 title="Random Images" />
 
             <ActionGroup>
-                <SearchInput type="text" placeholder='Search by author' onChange={ handleInputChange } value={ searchItem } onKeyDown={ handleKeySubmit } />
-                <Button literal="Color" method={ changePicStyleToColor } buttonStyle="primary" />
-                <Button literal="Grayscale" method={ changePicStyleToGray } buttonStyle="secondary" />
-                <Button literal="Blur" method={ changePicStyleToBlur } buttonStyle="secondary" />
+                <SearchGroup>
+                    <SearchInput type="text" placeholder='Search by author' onChange={ handleInputChange } value={ searchItem } onKeyDown={ handleKeySubmit } />
+                    <StyledIcon onClick={ handleSubmit } />
+                </SearchGroup>
+                <div>
+                    <Button active={ currentStyle === 'color' } literal="Color" method={ changePicStyleToColor } buttonStyle="secondary" />
+                    <Button active={ currentStyle === 'grayscale' } literal="Grayscale" method={ changePicStyleToGray } buttonStyle="secondary" />
+                    <Button active={ currentStyle === 'blur' } literal="Blur" method={ changePicStyleToBlur } buttonStyle="secondary" />
+                </div>
             </ActionGroup>
 
             <Grid>

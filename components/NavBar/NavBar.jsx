@@ -14,6 +14,23 @@ const StyledNavBar = styled.nav`
     top:0;
     left:0;
     right:0;
+    @media (max-width: 575px) {
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        width:100vw;
+        padding: ${({ scroll }) => (scroll ? `9px 0 10px` : `13px 0`)};
+    };
+
+
+`
+const LogoStyled = styled.img`
+    width: ${({ scroll }) => (scroll ? `128px` : `192px`)};
+    height: ${({ scroll }) => (scroll ? `38px` : `57px`)};
+    @media (max-width: 575px) {
+        width: ${({ scroll }) => (scroll ? `96px` : `128px`)};
+        height: ${({ scroll }) => (scroll ? `29px` : `38px`)};
+    };
 `
 
 const NavBar = () => {
@@ -41,7 +58,7 @@ const NavBar = () => {
 
     return (
         <StyledNavBar ref={ theNav } scroll={ scroll } >
-            <Image src="/assets/CoolPicsLogo.svg" alt="SuperLogo de CoolPics" width={ scroll ? 128 : 192 } height={ scroll ? 38 : 57 } />
+            <LogoStyled scroll={ scroll } src="/assets/CoolPicsLogo.svg" alt="SuperLogo de CoolPics" />
         </StyledNavBar>
     )
 }
