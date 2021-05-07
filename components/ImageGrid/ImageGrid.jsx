@@ -31,6 +31,7 @@ const StyledContainer = styled.div`
     }
     @media (max-width: 575px) {
         max-width: 382px;
+        align-items: center;
     };
     @media (max-width: 399px) {
         max-width: 300px;
@@ -125,7 +126,7 @@ const StyledH2 = styled.h2`
     font-family: ${themeFont.family};
     font-weight: ${themeFont.weight.normal};
     font-size: ${themeFont.sizes.h2};
-    text-align: ${({ align }) => align ? `${align}` : `left`}
+    text-align: ${({ align }) => align ? `${align}` : `left`};
     @media (max-width: 575px) {
         text-align: center;
         font-size: 32px;
@@ -133,7 +134,6 @@ const StyledH2 = styled.h2`
     }
 
 `
-
 
 const ImageGrid = ({ allImages }) => {
     const [gridState, setGridState] = useState({})
@@ -154,15 +154,27 @@ const ImageGrid = ({ allImages }) => {
     }
 
     const morePictures = () => {
+        const copyImages = [...allImages]
+        const currentCut = copyImages.splice(counter, 9)
         setLoading(true)
-        Promise.resolve()
-            .then(() => {
-                const copyImages = [...allImages]
-                const currentCut = copyImages.splice(counter, 9)
-                setGridState(gridState => ({ ...gridState, imagesToShow: [...gridState.imagesToShow, ...currentCut] }))
-                setCounter(counter => counter + 9)
-            })
-            .then(() => setTimeout(() => setLoading(false), [500]))
+        if (setSearchItem) {
+            Promise.resolve()
+                .then(() => {
+                    const searchInCut = currentCut.filter(pic => pic.author.toLowerCase().includes(searchItem))
+                    setGridState(gridState => ({ ...gridState, imagesToShow: [...gridState.imagesToShow, ...searchInCut], prevLoadedImages: currentCut }))
+                    setCounter(counter => counter + 9)
+                })
+                .then(() => setTimeout(() => setLoading(false), [500]))
+
+        } else {
+
+            Promise.resolve()
+                .then(() => {
+                    setGridState(gridState => ({ ...gridState, imagesToShow: [...gridState.imagesToShow, ...currentCut] }))
+                    setCounter(counter => counter + 9)
+                })
+                .then(() => setTimeout(() => setLoading(false), [500]))
+        }
     }
 
     const changePicStyleToColor = useCallback(() => {
@@ -185,12 +197,18 @@ const ImageGrid = ({ allImages }) => {
 
     const handleSubmit = () => {
         setLoading(true)
+        !gridState.prevLoadedImages?.length && setGridState(gridState => ({ ...gridState, prevLoadedImages: gridState.imagesToShow }))
         Promise.resolve()
             .then(() => {
                 if (searchItem) {
-                    const searchingImages = gridState.imagesToShow.filter(pic => pic.author.toLowerCase().includes(searchItem))
+                    const searchingImages = gridState.prevLoadedImages?.length
+                        ?
+                        gridState.prevLoadedImages.filter(pic => pic.author.toLowerCase().includes(searchItem))
+                        :
+                        gridState.imagesToShow.filter(pic => pic.author.toLowerCase().includes(searchItem))
                     setGridState(gridState => ({ ...gridState, imagesToShow: searchingImages }))
                 } else {
+                    setGridState(gridState => ({ ...gridState, prevLoadedImages: [] }))
                     setFirstImages(counter)
                 }
             })

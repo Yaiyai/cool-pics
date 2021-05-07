@@ -122,6 +122,7 @@ const StyledImageCard = styled.article`
         box-shadow:none;
         filter:none;
         margin-bottom: 16.2px;
+        margin-right:0;
         &:last-of-type{
             margin-bottom:0;
         }
