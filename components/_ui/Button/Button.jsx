@@ -35,10 +35,14 @@ const SecondaryButton = styled(StyledButton)`
         background-color: ${themeColors.gray};
         color: white;
     }
-`
+    `
 const OutlinedButton = styled(StyledButton)`
     background: #FFFFFF;
     border: 1px solid #111111;
+    &:hover{
+        background-color: black;
+        color: white;
+    }
 `
 
 const Button = React.memo(({ literal, method, buttonStyle, active }) => {

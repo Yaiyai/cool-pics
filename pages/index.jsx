@@ -25,7 +25,7 @@ export const getStaticProps = async () => {
   const cleanImages = []
 
   firstPictures.forEach((pix, idx) => {
-    cleanImages.push({ author: pix.author, order: idx + 1 < 10 ? `#0${idx + 1}` : `#${idx + 1}`, url: `https://picsum.photos/id/${pix.id}/400/?random=2` })
+    cleanImages.push({ author: pix.author, order: idx + 1 < 10 ? `#0${idx + 1}` : `#${idx + 1}`, url: `https://picsum.photos/id/${pix.id}/400` })
   })
 
   return { props: { cleanImages } }

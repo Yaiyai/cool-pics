@@ -40,8 +40,6 @@ const imageDown = keyframes`
 const StyledImageCard = styled.article`
     width: 387px;
     height: 343px;
-
-
     background-image: ${({ imageUrl }) => imageUrl ? `url(${imageUrl})` : `url(assets/perrete.jpg)`};
     background-size: cover;
     background-repeat: no-repeat;
@@ -133,8 +131,6 @@ const StyledImageCard = styled.article`
         height:266px;
         margin-right:0;
     };
-
-  
 `
 
 const InfoHover = styled.p`
@@ -178,7 +174,7 @@ const InfoId = styled.p`
 
 const ImageCard = React.memo(({ imageUrl, author, picId, style }) => {
     return (
-        <StyledImageCard imageUrl={ style ? `${imageUrl}&${style}` : `${imageUrl}` }>
+        <StyledImageCard imageUrl={ style ? `${imageUrl}?${style}` : `${imageUrl}` }>
             <InfoId>{ picId }</InfoId>
             <InfoHover>{ author }</InfoHover>
         </StyledImageCard>
