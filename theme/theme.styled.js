@@ -1,3 +1,5 @@
+import { keyframes } from 'styled-components'
+
 export const themeColors = {
 	primary: '#7FC4FD',
 	secondary: '#000000',
@@ -36,3 +38,54 @@ export const themeBreakpoints = {
 	xlDown: '1499px',
 	xxlUp: '1500px',
 }
+
+export const LoaderAnimation = keyframes`
+    from {
+        top: 36px;
+        left: 36px;
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+    to {
+        top: 0px;
+        left: 0px;
+        width: 72px;
+        height: 72px;
+        opacity: 0;
+    }
+`
+
+export const fadeIn = keyframes`
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+`
+export const fadeOut = keyframes`
+    from {
+        opacity:1;
+    }
+    to {
+        opacity:0;
+    }
+`
+
+export const imageUp = keyframes`
+    from{
+        background-position-y:center;
+    }
+    to{
+        background-position-y:-50px;
+    }
+`
+export const imageDown = keyframes`
+    from{
+        background-position-y:-50px;
+    }
+    to{
+        background-position-y:center;
+    }
+`

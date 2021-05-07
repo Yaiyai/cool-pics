@@ -21,7 +21,7 @@ const HeaderSection = styled.section`
         padding-top:106px;
         padding-bottom: 294px;
     };
-    `
+`
 const StyledContainer = styled.div`
     width: 100%;
 	margin: 0 auto;
@@ -52,7 +52,7 @@ const StyledContainer = styled.div`
         max-width: 300px;
     };
     
-    `
+`
 
 const LeftSection = styled.section`
     width: 50%;

@@ -1,41 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled, { keyframes } from 'styled-components'
-import { themeFont } from '../../../theme/theme.styled'
+import styled from 'styled-components'
+import { fadeIn, fadeOut, imageDown, imageUp, themeFont } from '../../../theme/theme.styled'
 
-const fadeIn = keyframes`
-    from {
-        opacity:0;
-    }
-    to {
-        opacity:1;
-    }
-`
-const fadeOut = keyframes`
-    from {
-        opacity:1;
-    }
-    to {
-        opacity:0;
-    }
-`
-
-const imageUp = keyframes`
-    from{
-        background-position-y:center;
-    }
-    to{
-        background-position-y:-50px;
-    }
-`
-const imageDown = keyframes`
-    from{
-        background-position-y:-50px;
-    }
-    to{
-        background-position-y:center;
-    }
-`
 
 const StyledImageCard = styled.article`
     width: 387px;
@@ -43,8 +10,8 @@ const StyledImageCard = styled.article`
     background-image: ${({ imageUrl }) => imageUrl ? `url(${imageUrl})` : `url(assets/perrete.jpg)`};
     background-size: cover;
     background-repeat: no-repeat;
-    background-position-x: center;
     animation: ${imageDown} 500ms ease-out;
+    background-position-x: center;
     background-position-y: center;
     border: 1px solid #EEEEEE;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
@@ -52,7 +19,6 @@ const StyledImageCard = styled.article`
     margin-bottom: 24px;
     position: relative;
     overflow:hidden;
-    box-shadow: 0px 4px 14px 0px #00000040;
     padding: 16px;
     display:flex;
     align-items:flex-start;
@@ -98,28 +64,27 @@ const StyledImageCard = styled.article`
     @media (min-width: 769px) and (max-width: 991px) {
         width: 363px;
         height: 321px;
-        &:nth-child(2n){
-            margin-right:0;
-        }
-        &:nth-child(3n){
+        &:nth-child(odd){
             margin-right:24px;
+        }
+        &:nth-child(even){
+            margin-right:0;
         }
     }
     @media (min-width: 576px) and (max-width: 768px) {
-        width: 253px;
-        height: 224px;
-        &:nth-child(2n){
-            margin-right:0;
-        }
-        &:nth-child(3n){
+        width: 263px;
+        height: 233px;
+        &:nth-child(odd){
             margin-right:24px;
+        }
+        &:nth-child(even){
+            margin-right:0;
         }
     }
 
     @media (max-width: 575px) {
         width: 380px;
         height: 336.8px;
-        box-shadow:none;
         filter:none;
         margin-bottom: 16.2px;
         margin-right:0;
@@ -168,7 +133,6 @@ const InfoId = styled.p`
     font-weight: ${themeFont.weight.normal};
     font-size: ${themeFont.sizes.xl};
     line-height:28.63px;
-
 `
 
 

@@ -1,23 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
+import { LoaderAnimation } from '../../../theme/theme.styled'
 
-const LoaderAnimation = keyframes`
-    from {
-        top: 36px;
-        left: 36px;
-        width: 0;
-        height: 0;
-        opacity: 1;
-    }
-    to {
-        top: 0px;
-        left: 0px;
-        width: 72px;
-        height: 72px;
-        opacity: 0;
-    }
-`
 
 const LoaderStyled = styled.div`
     position:fixed;

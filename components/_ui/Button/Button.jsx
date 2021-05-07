@@ -8,7 +8,7 @@ const StyledButton = styled.button`
     outline: none;
     border: none;
     padding-top:18px;
-    padding-bottom:18px;
+    padding-bottom:19px;
     border-radius: 8px;
     text-transform: uppercase;
     font-family: ${themeFont.family};
@@ -27,7 +27,7 @@ const PrimaryButton = styled(StyledButton)`
     &:hover{
         background-color: #BCE0FD;
     }
-    `
+`
 const SecondaryButton = styled(StyledButton)`
     color: ${({ active }) => active ? `black` : `white`};;
     background-color: ${({ active }) => active ? `${themeColors.primary}` : `black`};
@@ -35,10 +35,13 @@ const SecondaryButton = styled(StyledButton)`
         background-color: ${themeColors.gray};
         color: white;
     }
-    `
+`
 const OutlinedButton = styled(StyledButton)`
     background: #FFFFFF;
     border: 1px solid #111111;
+    padding-top:17px;
+    padding-bottom:18px;
+
     &:hover{
         background-color: black;
         color: white;
