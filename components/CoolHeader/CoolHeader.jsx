@@ -31,6 +31,7 @@ const HeaderSection = styled.section`
     @media (min-width: 400px) and (max-width: 575px) {
         padding-top:106px;
         padding-bottom: 294px;
+        margin-bottom: 127px;
     };
     @media (max-width: 399px) {
         padding-top:106px;
