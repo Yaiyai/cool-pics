@@ -6,7 +6,11 @@ export const getPictures = async (page = 1, limit = 100) => {
 	const cleanImages = []
 
 	fetchPictures.forEach((pix, idx) => {
-		cleanImages.push({ author: pix.author, order: idx + 1 < 10 ? `#0${idx + 1}` : `#${idx + 1}`, url: `https://picsum.photos/id/${pix.id}/400` })
+		if (page === 1) {
+			cleanImages.push({ author: pix.author, order: idx + 1 < 10 ? `#0${idx + 1}` : `#${idx + 1}`, url: `https://picsum.photos/id/${pix.id}/400` })
+		} else {
+			cleanImages.push({ author: pix.author, order: idx + 1 < 10 ? `#${page - 1}0${idx + 1}` : `#${page - 1}${idx + 1}`, url: `https://picsum.photos/id/${pix.id}/400` })
+		}
 	})
 
 	return cleanImages

@@ -11,6 +11,7 @@ import Message from '../_ui/Message/Message'
 import SearchInput from '../_ui/SearchInput/SearchInput'
 
 import { themeColors, themeFont } from '../../theme/theme.styled'
+import { getPictures } from '../../pages/api/picsum.api'
 
 
 const Grid = styled.article`
@@ -85,7 +86,9 @@ const StyledH2 = styled.h2`
 `
 
 const Images = ({ allImages }) => {
-    const [imagesState, setImagesState] = useState({})
+    const [imagesState, setImagesState] = useState({ apiImages: allImages })
+
+    const [pagedApi, setPagedApi] = useState(2)
 
     const [loading, setLoading] = useState(false)
     const [counter, setCounter] = useState(9)
@@ -101,32 +104,40 @@ const Images = ({ allImages }) => {
     //Images Methods
 
     const setFirstImages = (limit = 9) => {
-        const copyImages = [...allImages]
-        const firstCut = [...allImages].splice(0, limit)
-        setImagesState(gridState => ({ ...gridState, imagesToShow: firstCut }))
+        const firstCut = [...imagesState.apiImages].splice(0, limit)
+        setImagesState(imagesState => ({ ...imagesState, imagesToShow: firstCut }))
     }
 
     const morePictures = () => {
-        const copyImages = [...allImages]
-        const currentCut = [...allImages].splice(counter, 9)
+        const currentCut = [...imagesState.apiImages].splice(counter, 9)
         setLoading(true)
+
         if (searchImage) {
             Promise.resolve()
+                .then(() => imagesState.imagesToShow.length % 90 == 0 && anotherHundredImages())
                 .then(() => {
                     const searchInCut = currentCut.filter(pic => pic.author.toLowerCase().includes(searchImage))
-                    setImagesState(gridState => ({ ...gridState, imagesToShow: [...gridState.imagesToShow, ...searchInCut], prevLoadedImages: currentCut }))
+                    setImagesState(imagesState => ({ ...imagesState, imagesToShow: [...imagesState.imagesToShow, ...searchInCut], prevLoadedImages: currentCut }))
                     setCounter(counter => counter + 9)
                 })
                 .then(() => setTimeout(() => setLoading(false), [500]))
 
         } else {
             Promise.resolve()
+                .then(() => imagesState.imagesToShow.length % 90 == 0 && anotherHundredImages())
                 .then(() => {
-                    setImagesState(gridState => ({ ...gridState, imagesToShow: [...gridState.imagesToShow, ...currentCut] }))
+                    setImagesState(imagesState => ({ ...imagesState, imagesToShow: [...imagesState.imagesToShow, ...currentCut] }))
                     setCounter(counter => counter + 9)
                 })
                 .then(() => setTimeout(() => setLoading(false), [500]))
         }
+    }
+
+    const anotherHundredImages = async () => {
+        console.log('hola');
+        const hundredPictures = await getPictures(pagedApi, 100)
+        setImagesState(imagesState => ({ ...imagesState, apiImages: [...imagesState.apiImages, ...hundredPictures] }))
+        setPagedApi(p => p + 1)
     }
 
     //Color Methods
@@ -151,7 +162,7 @@ const Images = ({ allImages }) => {
 
     const handleSubmit = () => {
         setLoading(true)
-        !imagesState.prevLoadedImages?.length && setImagesState(gridState => ({ ...gridState, prevLoadedImages: gridState.imagesToShow }))
+        !imagesState.prevLoadedImages?.length && setImagesState(imagesState => ({ ...imagesState, prevLoadedImages: imagesState.imagesToShow }))
         Promise.resolve()
             .then(() => {
                 if (searchImage) {
@@ -160,9 +171,9 @@ const Images = ({ allImages }) => {
                         imagesState.prevLoadedImages.filter(pic => pic.author.toLowerCase().includes(searchImage))
                         :
                         imagesState.imagesToShow.filter(pic => pic.author.toLowerCase().includes(searchImage))
-                    setImagesState(gridState => ({ ...gridState, imagesToShow: searchingImages }))
+                    setImagesState(imagesState => ({ ...imagesState, imagesToShow: searchingImages }))
                 } else {
-                    setImagesState(gridState => ({ ...gridState, prevLoadedImages: [] }))
+                    setImagesState(imagesState => ({ ...imagesState, prevLoadedImages: [] }))
                     setFirstImages(counter)
                 }
             })
@@ -171,7 +182,7 @@ const Images = ({ allImages }) => {
 
     const handleEraseInput = () => {
         setSearchImage('')
-        setImagesState(gridState => ({ ...gridState, prevLoadedImages: [] }))
+        setImagesState(imagesState => ({ ...imagesState, prevLoadedImages: [] }))
         setFirstImages(counter)
     }
 
@@ -212,7 +223,7 @@ const Images = ({ allImages }) => {
                         )
                     }
                 </Grid>
-                { counter < 100 ? <Button literal="Load More" method={ morePictures } buttonStyle="outlined" /> : <Message literal={ `That's all!` } /> }
+                <Button literal="Load More" method={ morePictures } buttonStyle="outlined" />
             </GridContainer>
         </>
     )
