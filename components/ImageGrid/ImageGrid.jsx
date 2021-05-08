@@ -6,6 +6,7 @@ import Button from '../_ui/Button/Button'
 import { themeColors, themeFont } from '../../theme/theme.styled'
 import { IoSearchSharp } from 'react-icons/io5'
 import Loader from '../_ui/Loader/Loader'
+import Message from '../_ui/Message/Message'
 
 const StyledContainer = styled.div`
     width: 100%;
@@ -43,6 +44,7 @@ const Grid = styled.section`
     align-items:center;
     flex-wrap:wrap;
     padding: 0 0 48px;
+    width: 100%;
     + button{
         width: 300px;
         margin-bottom: 144px;
@@ -144,7 +146,6 @@ const ImageGrid = ({ allImages }) => {
     const [searchItem, setSearchItem] = useState('')
 
     //Images Methods
-    // // Each time more images are loaded, the counter is increased by 9 units for reference in the initial image array. The initial count is the number of images required in the first load.
     const [counter, setCounter] = useState(9)
 
     const setFirstImages = (limit = 9) => {
@@ -234,7 +235,7 @@ const ImageGrid = ({ allImages }) => {
 
                 <ActionGroup>
                     <SearchGroup>
-                        <SearchInput type="text" placeholder='Search by author' onChange={ handleInputChange } value={ searchItem } onKeyDown={ handleKeySubmit } />
+                        <SearchInput type="text" placeholder='Search by author' onChange={ handleInputChange } onKeyDown={ handleKeySubmit } />
                         <StyledIcon onClick={ handleSubmit } />
                     </SearchGroup>
                     <div>
@@ -254,11 +255,11 @@ const ImageGrid = ({ allImages }) => {
                             style={ currentStyle }
                         />
                         )) : (
-                            <p>Oops! Nothing to show here!</p>
+                            <Message literal='Oops! Nothing to show here!' />
                         )
                     }
                 </Grid>
-                <Button literal="Load More" method={ morePictures } buttonStyle="outlined" />
+                { counter < 100 ? <Button literal="Load More" method={ morePictures } buttonStyle="outlined" /> : <Message literal={ `That's all!` } /> }
             </StyledContainer>
         </>
     )
