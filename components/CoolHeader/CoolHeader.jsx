@@ -1,9 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import styled from 'styled-components'
+
 import Button from '../_ui/Button/Button'
-import { themeColors, themeFont } from '../../theme/theme.styled'
+import HeaderContainer from '../_ui/Containers/HeaderContainer'
 import HeaderCard from '../_ui/HeaderCard/HeaderCard'
+
+import { themeColors, themeFont } from '../../theme/theme.styled'
+import H1Title from '../_ui/Titles/H1Title'
+import H2Title from '../_ui/Titles/H2Title'
 
 const HeaderSection = styled.section`
     background-color: black;
@@ -22,40 +28,18 @@ const HeaderSection = styled.section`
         padding-bottom: 294px;
     };
 `
-const StyledContainer = styled.div`
-    width: 100%;
-	margin: 0 auto;
-    display:flex;
-    @media (max-width: 768px) {
-        flex-direction: column;
-    }
-    align-items: flex-start;
-    @media (min-width: 1300px) {
-        max-width: 1209px;
-    };
-    @media (min-width: 1199px) and (max-width: 1299px) {
-        max-width: 1150px;
-    }
-    @media (min-width: 992px) and (max-width: 1199px) {
-        max-width: 920px;
-    }
-    @media (min-width: 769px) and (max-width: 991px) {
-        max-width: 750px;
-    }
-    @media (min-width: 576px) and (max-width: 768px) {
-        max-width: 530px;
-    }
-    @media (min-width: 400px) and (max-width: 575px) {
-        max-width: 382px;
-    };
-    @media (max-width: 399px) {
-        max-width: 300px;
-    };
-    
-`
+
 
 const LeftSection = styled.section`
     width: 50%;
+    h1{
+        max-width: 439px;
+        margin-bottom: 32px;
+    }
+    h2{
+        width: 350px;
+        margin-bottom: 40px;
+    }
     button{
         width: 300px;
         @media (max-width: 575px) {
@@ -81,47 +65,19 @@ const RightSection = styled.section`
     };
 `
 
-const MainTitle = styled.h1`
-    max-width: 439px;
-    font-weight: ${themeFont.weight.normal};
-    font-size: ${themeFont.sizes.h1};
-    line-height: 76px;
-    margin-bottom: 32px;
-    @media (max-width: 575px) {
-        font-size: 32px;
-        line-height: 38px;
-    };
-
-`
-const SecondTitle = styled.h2`
-    color: ${themeColors.lightGray};
-    font-weight: ${themeFont.weight.normal};
-    font-size: ${themeFont.sizes.normal};
-    width: 350px;
-    line-height: 19px;
-    margin-bottom: 40px;
-    @media (max-width: 575px) {
-        font-size: 16px;
-        line-height: 19px;
-    };
-
-
-`
-
-
 const CoolHeader = ({ title, subtitle, buttonLiteral, buttonMethod }) => {
     return (
         <HeaderSection>
-            <StyledContainer>
+            <HeaderContainer>
                 <LeftSection>
-                    <MainTitle>{ title }</MainTitle>
-                    <SecondTitle>{ subtitle }</SecondTitle>
+                    <H1Title literal={ title } />
+                    <H2Title literal={ subtitle } />
                     <Button literal={ buttonLiteral } method={ buttonMethod } buttonStyle="primary" />
                 </LeftSection>
                 <RightSection>
                     <HeaderCard />
                 </RightSection>
-            </StyledContainer>
+            </HeaderContainer>
         </HeaderSection>
     )
 }

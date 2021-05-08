@@ -1,45 +1,19 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+
 import styled from 'styled-components'
-import ImageCard from '../_ui/ImageCard/ImageCard'
+
 import Button from '../_ui/Button/Button'
-import { themeColors, themeFont } from '../../theme/theme.styled'
-import { IoSearchSharp } from 'react-icons/io5'
+import GridContainer from '../_ui/Containers/GridContainer'
+import ImageCard from '../_ui/ImageCard/ImageCard'
 import Loader from '../_ui/Loader/Loader'
 import Message from '../_ui/Message/Message'
+import SearchInput from '../_ui/SearchInput/SearchInput'
 
-const StyledContainer = styled.div`
-    width: 100%;
-	margin: 0 auto;
-    display:flex;
-    flex-direction: column;
-    align-items: flex-start;
+import { themeColors, themeFont } from '../../theme/theme.styled'
 
-    @media (min-width: 1300px) {
-        max-width: 1209px;
-    };
-    @media (min-width: 1199px) and (max-width: 1299px) {
-        max-width: 1150px;
-    }
-    @media (min-width: 992px) and (max-width: 1199px) {
-        max-width: 920px;
-    }
-    @media (min-width: 769px) and (max-width: 991px) {
-        max-width: 750px;
-    }
-    @media (min-width: 576px) and (max-width: 768px) {
-        max-width: 550px;
-    }
-    @media (max-width: 575px) {
-        max-width: 382px;
-        align-items: center;
-    };
-    @media (max-width: 399px) {
-        max-width: 300px;
-    };
-`
 
-const Grid = styled.section`
+const Grid = styled.article`
     display: flex;
     align-items:center;
     flex-wrap:wrap;
@@ -81,55 +55,11 @@ const ActionGroup = styled.article`
 
 `
 
-const SearchGroup = styled.div`
-    position:relative;
-    margin-right: 32px;
-    @media (max-width: 768px) {
-        margin-right:0;
-        width: 100%;
-    }
-`
-
-const StyledIcon = styled(IoSearchSharp)`
-    position:absolute;
-    right:15px;
-    top:15px;
-    width: 23.72px;
-    height: 23.72px;
-    color: #AAAAAA;
-    cursor:pointer;
-    &:hover{
-        color: ${themeColors.primary};
-    }
-`
-
-const SearchInput = styled.input`
-    background: #FFFFFF;
-    border: 1px solid #AAAAAA;
-    box-sizing: border-box;
-    border-radius: 8px;
-    padding: 18px 24px;
-    width: 400px;
-    font-family: ${themeFont.family};
-    -webkit-appearance: none;
-    &::placeholder{
-        font-family: ${themeFont.family};
-        font-size: 16px;
-        line-height: 19px;
-        color: #AAAAAA;
-    }
-    @media (max-width: 768px) {
-        margin-bottom:16px;
-        width: 100%;
-    }
-
-`
-
 const StyledH2 = styled.h2`
     font-family: ${themeFont.family};
     font-weight: ${themeFont.weight.normal};
     font-size: ${themeFont.sizes.h2};
-    text-align: ${({ align }) => align ? `${align}` : `left`};
+    line-height: 67px;
     @media (max-width: 575px) {
         text-align: center;
         font-size: 32px;
@@ -138,46 +68,52 @@ const StyledH2 = styled.h2`
 
 `
 
-const ImageGrid = ({ allImages }) => {
-    const [gridState, setGridState] = useState({})
+const Images = ({ allImages }) => {
+    const [imagesState, setImagesState] = useState({})
+
     const [loading, setLoading] = useState(false)
+    const [counter, setCounter] = useState(9)
 
     const [currentStyle, setCurrentStyle] = useState('color')
 
-    const [searchItem, setSearchItem] = useState('')
+    const [searchImage, setSearchImage] = useState('')
+
+    useEffect(() => {
+        setFirstImages()
+    }, [])
 
     //Images Methods
-    const [counter, setCounter] = useState(9)
 
     const setFirstImages = (limit = 9) => {
         const copyImages = [...allImages]
-        const firstCut = copyImages.splice(0, limit)
-        setGridState(gridState => ({ ...gridState, imagesToShow: firstCut }))
+        const firstCut = [...allImages].splice(0, limit)
+        setImagesState(gridState => ({ ...gridState, imagesToShow: firstCut }))
     }
 
     const morePictures = () => {
         const copyImages = [...allImages]
-        const currentCut = copyImages.splice(counter, 9)
+        const currentCut = [...allImages].splice(counter, 9)
         setLoading(true)
-        if (setSearchItem) {
+        if (searchImage) {
             Promise.resolve()
                 .then(() => {
-                    const searchInCut = currentCut.filter(pic => pic.author.toLowerCase().includes(searchItem))
-                    setGridState(gridState => ({ ...gridState, imagesToShow: [...gridState.imagesToShow, ...searchInCut], prevLoadedImages: currentCut }))
+                    const searchInCut = currentCut.filter(pic => pic.author.toLowerCase().includes(searchImage))
+                    setImagesState(gridState => ({ ...gridState, imagesToShow: [...gridState.imagesToShow, ...searchInCut], prevLoadedImages: currentCut }))
                     setCounter(counter => counter + 9)
                 })
                 .then(() => setTimeout(() => setLoading(false), [500]))
 
         } else {
-
             Promise.resolve()
                 .then(() => {
-                    setGridState(gridState => ({ ...gridState, imagesToShow: [...gridState.imagesToShow, ...currentCut] }))
+                    setImagesState(gridState => ({ ...gridState, imagesToShow: [...gridState.imagesToShow, ...currentCut] }))
                     setCounter(counter => counter + 9)
                 })
                 .then(() => setTimeout(() => setLoading(false), [500]))
         }
     }
+
+    //Color Methods
 
     const changePicStyleToColor = useCallback(() => {
         setCurrentStyle('color')
@@ -194,28 +130,27 @@ const ImageGrid = ({ allImages }) => {
 
     //Input methods
     const handleInputChange = (e) => {
-        setSearchItem(e.target.value)
+        setSearchImage(e.target.value)
     }
 
     const handleSubmit = () => {
         setLoading(true)
-        !gridState.prevLoadedImages?.length && setGridState(gridState => ({ ...gridState, prevLoadedImages: gridState.imagesToShow }))
+        !imagesState.prevLoadedImages?.length && setImagesState(gridState => ({ ...gridState, prevLoadedImages: gridState.imagesToShow }))
         Promise.resolve()
             .then(() => {
-                if (searchItem) {
-                    const searchingImages = gridState.prevLoadedImages?.length
+                if (searchImage) {
+                    const searchingImages = imagesState.prevLoadedImages?.length
                         ?
-                        gridState.prevLoadedImages.filter(pic => pic.author.toLowerCase().includes(searchItem))
+                        imagesState.prevLoadedImages.filter(pic => pic.author.toLowerCase().includes(searchImage))
                         :
-                        gridState.imagesToShow.filter(pic => pic.author.toLowerCase().includes(searchItem))
-                    setGridState(gridState => ({ ...gridState, imagesToShow: searchingImages }))
+                        imagesState.imagesToShow.filter(pic => pic.author.toLowerCase().includes(searchImage))
+                    setImagesState(gridState => ({ ...gridState, imagesToShow: searchingImages }))
                 } else {
-                    setGridState(gridState => ({ ...gridState, prevLoadedImages: [] }))
+                    setImagesState(gridState => ({ ...gridState, prevLoadedImages: [] }))
                     setFirstImages(counter)
                 }
             })
             .then(() => setTimeout(() => setLoading(false), [500]))
-
     }
 
     const handleKeySubmit = (e) => {
@@ -224,21 +159,14 @@ const ImageGrid = ({ allImages }) => {
         }
     }
 
-    useEffect(() => {
-        setFirstImages()
-    }, [])
-
     return (
         <>
             {loading && <Loader /> }
-            <StyledContainer>
+            <GridContainer>
                 <StyledH2>Random Images</StyledH2>
 
                 <ActionGroup>
-                    <SearchGroup>
-                        <SearchInput type="text" placeholder='Search by author' onChange={ handleInputChange } onKeyDown={ handleKeySubmit } />
-                        <StyledIcon onClick={ handleSubmit } />
-                    </SearchGroup>
+                    <SearchInput placeholder='Search by author' inputChange={ handleInputChange } iconSubmit={ handleSubmit } keySubmit={ handleKeySubmit } />
                     <div>
                         <Button active={ currentStyle === 'color' } literal="Color" method={ changePicStyleToColor } buttonStyle="secondary" />
                         <Button active={ currentStyle === 'grayscale' } literal="Grayscale" method={ changePicStyleToGray } buttonStyle="secondary" />
@@ -247,8 +175,8 @@ const ImageGrid = ({ allImages }) => {
                 </ActionGroup>
 
                 <Grid>
-                    { gridState?.imagesToShow?.length ?
-                        (gridState?.imagesToShow?.map((pic, idx) => <ImageCard
+                    { imagesState?.imagesToShow?.length ?
+                        (imagesState?.imagesToShow?.map((pic, idx) => <ImageCard
                             key={ pic.order }
                             picId={ pic.order }
                             author={ pic.author }
@@ -261,13 +189,13 @@ const ImageGrid = ({ allImages }) => {
                     }
                 </Grid>
                 { counter < 100 ? <Button literal="Load More" method={ morePictures } buttonStyle="outlined" /> : <Message literal={ `That's all!` } /> }
-            </StyledContainer>
+            </GridContainer>
         </>
     )
 }
 
-ImageGrid.propTypes = {
+Images.propTypes = {
     allImages: PropTypes.array.isRequired
 }
 
-export default ImageGrid
+export default Images

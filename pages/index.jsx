@@ -1,6 +1,6 @@
 import React from 'react'
 import CoolHeader from '../components/CoolHeader/CoolHeader'
-import ImageGrid from '../components/ImageGrid/ImageGrid'
+import Images from '../components/Images/Images'
 import Button from '../components/_ui/Button/Button'
 import ImageCard from '../components/_ui/ImageCard/ImageCard'
 import CoolPicsLayout from '../layout/CoolPicsLayout'
@@ -15,7 +15,7 @@ const Home = ({ firstPictures }) => {
         subtitle="CoolPics helps you to spend hours of your day scrolling down and sharing a big list of random images. "
         buttonLiteral="Start Here"
       />
-      {firstPictures?.length && <ImageGrid allImages={ firstPictures } /> }
+      {firstPictures?.length && <Images allImages={ firstPictures } /> }
     </CoolPicsLayout>
   )
 }
