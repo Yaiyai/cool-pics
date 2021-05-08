@@ -34,9 +34,11 @@ const StyledImageCard = styled.article`
     &:hover{
         animation: ${imageUp} 500ms ease-out;
         background-position-y:-50px;
+        filter: drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.25));
         @media (max-width: 768px) {
             animation: none;
             background-position-y:center;
+            filter:none;
         }
 
         p{
@@ -115,12 +117,11 @@ const InfoHover = styled.p`
     font-family: ${themeFont.family};
     font-weight: ${themeFont.weight.normal};
     font-size: ${themeFont.sizes.xl};
-    line-height:28.63px;
+    line-height:29px;
     @media (max-width: 768px) {
         opacity:1;
         animation: none;
     }
-
 `
 
 const InfoId = styled.p`
@@ -132,7 +133,7 @@ const InfoId = styled.p`
     font-family: ${themeFont.family};
     font-weight: ${themeFont.weight.normal};
     font-size: ${themeFont.sizes.xl};
-    line-height:28.63px;
+    line-height:29px;
 `
 
 

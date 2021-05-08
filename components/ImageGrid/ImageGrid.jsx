@@ -111,6 +111,7 @@ const SearchInput = styled.input`
     padding: 18px 24px;
     width: 400px;
     font-family: ${themeFont.family};
+    -webkit-appearance: none;
     &::placeholder{
         font-family: ${themeFont.family};
         font-size: 16px;
