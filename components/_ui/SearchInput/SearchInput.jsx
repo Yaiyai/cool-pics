@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useRef } from 'react'
 
 import styled from 'styled-components'
 
 import { themeColors, themeFont } from '../../../theme/theme.styled'
 
-import { IoSearchSharp } from 'react-icons/io5'
+import { IoSearchSharp, IoClose } from 'react-icons/io5'
 
 const SearchGroup = styled.div`
     position:relative;
@@ -36,7 +36,7 @@ const StyledSearchInput = styled.input`
     }
 
 `
-const StyledIcon = styled(IoSearchSharp)`
+const StyledLupa = styled(IoSearchSharp)`
     position:absolute;
     right:15px;
     top:15px;
@@ -48,15 +48,35 @@ const StyledIcon = styled(IoSearchSharp)`
         color: ${themeColors.primary};
     }
 `
+const StyledClose = styled(IoClose)`
+    position:absolute;
+    right:40px;
+    top:14px;
+    width: 27px;
+    height: 27px;
+    color: #AAAAAA;
+    cursor:pointer;
+    &:hover{
+        color: ${themeColors.primary};
+    }
+    display: ${({ showclose }) => showclose ? `block` : `none`}
+`
 
 
 
-const SearchInput = ({ placeholder, inputChange, iconSubmit, keySubmit }) => {
+const SearchInput = ({ placeholder, inputChange, iconSubmit, keySubmit, eraseInput, showclose }) => {
+    const inputSelected = useRef()
+
+    const clearInput = () => {
+        inputSelected.current.value = ''
+        eraseInput()
+    }
+
     return (
         <SearchGroup>
-
-            <StyledIcon onClick={ iconSubmit } />
-            <StyledSearchInput type="text" placeholder={ placeholder } onChange={ inputChange } onKeyDown={ keySubmit } />
+            <StyledClose onClick={ clearInput } showclose={ showclose } />
+            <StyledLupa onClick={ iconSubmit } />
+            <StyledSearchInput ref={ inputSelected } type="text" placeholder={ placeholder } onChange={ inputChange } onKeyDown={ keySubmit } />
         </SearchGroup>
     )
 }

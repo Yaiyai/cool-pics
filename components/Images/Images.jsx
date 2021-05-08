@@ -169,6 +169,12 @@ const Images = ({ allImages }) => {
             .then(() => setTimeout(() => setLoading(false), [500]))
     }
 
+    const handleEraseInput = () => {
+        setSearchImage('')
+        setImagesState(gridState => ({ ...gridState, prevLoadedImages: [] }))
+        setFirstImages(counter)
+    }
+
     const handleKeySubmit = (e) => {
         if (event.key === 'Enter') {
             handleSubmit(e)
@@ -182,7 +188,7 @@ const Images = ({ allImages }) => {
                 <StyledH2>Random Images</StyledH2>
 
                 <ActionGroup>
-                    <SearchInput placeholder='Search by author' inputChange={ handleInputChange } iconSubmit={ handleSubmit } keySubmit={ handleKeySubmit } />
+                    <SearchInput placeholder='Search by author' inputChange={ handleInputChange } iconSubmit={ handleSubmit } keySubmit={ handleKeySubmit } showclose={ searchImage } eraseInput={ handleEraseInput } />
                     <div className="btn-group">
                         <Button active={ currentStyle === 'color' } literal="Color" method={ changePicStyleToColor } buttonStyle="secondary" />
                         <Button active={ currentStyle === 'grayscale' } literal="Grayscale" method={ changePicStyleToGray } buttonStyle="secondary" />
