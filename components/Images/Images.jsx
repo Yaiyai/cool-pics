@@ -157,7 +157,7 @@ const Images = ({ allImages }) => {
 
     //Input methods
     const handleInputChange = (e) => {
-        setSearchImage(e.target.value)
+        setSearchImage(e.target.value.toLowerCase())
     }
 
     const handleSubmit = () => {

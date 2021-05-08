@@ -26,14 +26,21 @@ const PrimaryButton = styled(StyledButton)`
     background-color: ${themeColors.primary};
     &:hover{
         background-color: #BCE0FD;
+        @media (max-width: 767px){
+            background-color: ${themeColors.primary};
+        }
     }
 `
 const SecondaryButton = styled(StyledButton)`
-    color: ${({ active }) => active ? `black` : `white`};;
+    color: ${({ active }) => active ? `black` : `white`};
     background-color: ${({ active }) => active ? `${themeColors.primary}` : `black`};
     &:hover{
         background-color: ${themeColors.gray};
         color: white;
+        @media (max-width: 767px){
+            background-color: ${({ active }) => active ? `${themeColors.primary}` : `black`};
+            color: ${({ active }) => active ? `black` : `white`};
+        }
     }
 `
 const OutlinedButton = styled(StyledButton)`
@@ -48,6 +55,10 @@ const OutlinedButton = styled(StyledButton)`
     &:hover{
         background-color: black;
         color: white;
+        @media (max-width: 767px){
+            background-color:#ffffff;
+            color: black;
+        }
     }
 `
 
