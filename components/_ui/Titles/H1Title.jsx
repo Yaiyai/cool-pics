@@ -9,6 +9,9 @@ const StyledH1 = styled.h1`
     font-weight: ${themeFont.weight.normal};
     font-size: ${themeFont.sizes.h1};
     line-height: 76px;
+    @media (min-width: 576px) and (max-width: 991px) {
+        font-size: 3rem;
+    }
     @media (max-width: 575px) {
         font-size: 32px;
         line-height: 38px;

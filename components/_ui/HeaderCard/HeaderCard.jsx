@@ -28,10 +28,35 @@ const RotatedImage = styled.div`
         top: 30px;
         left: 30px;
     }
-    @media (max-width: 768px) {
+    @media (min-width: 769px) and (max-width: 991px) {
+        width:252.35px;
+        height:252.35px;
+        top:0px;
+    }
+    @media (min-width: 576px) and (max-width: 768px) {
         width:252.35px;
         height:252.35px;
         top:36px;
+        right:170px;
+    }
+    @media (min-width: 400px) and (max-width: 575px) {
+        width:252.35px;
+        height:252.35px;
+        top:36px;
+    }
+    @media (max-width: 399px) {
+        width:180px;
+        height:180px;
+        top:36px;
+        right: 55px;
+        &:after{
+            top: 40px;
+            left: 40px;
+        }
+        &:before{
+            top: 20px;
+            left: 20px;
+        }
     }
 `
 
@@ -51,9 +76,13 @@ const StyledDogFigure = styled.figure`
             height: 315px;
             object-fit: cover;
             object-position: center;
-            @media (max-width: 768px) {
+            @media (min-width: 400px) and (max-width: 992px) {
                 width:189.26px;
                 height:189.26px;
+            }
+            @media (max-width: 399px) {
+                width:130px;
+                height:130px;
             }
         }
 `

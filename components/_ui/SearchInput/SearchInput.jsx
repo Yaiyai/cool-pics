@@ -9,7 +9,7 @@ import { IoSearchSharp } from 'react-icons/io5'
 const SearchGroup = styled.div`
     position:relative;
     margin-right: 32px;
-    @media (max-width: 768px) {
+    @media (max-width: 991px) {
         margin-right:0;
         width: 100%;
     }
@@ -30,7 +30,7 @@ const StyledSearchInput = styled.input`
         line-height: 19px;
         color: #AAAAAA;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 991px) {
         margin-bottom:16px;
         width: 100%;
     }

@@ -60,7 +60,7 @@ const ActionGroup = styled.article`
             }
         }
     }
-    @media (max-width: 768px) {
+    @media (max-width: 991px) {
         flex-direction:column;
         padding-bottom: 30px;
     }
@@ -76,7 +76,7 @@ const StyledH2 = styled.h2`
     font-weight: ${themeFont.weight.normal};
     font-size: ${themeFont.sizes.h2};
     line-height: 67px;
-    @media (max-width: 575px) {
+    @media (max-width: 991px) {
         text-align: center;
         font-size: 32px;
         line-height: 38.12px;

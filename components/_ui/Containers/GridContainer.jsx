@@ -17,15 +17,15 @@ const StyledContainerImages = styled.section`
     @media (min-width: 992px) and (max-width: 1199px) {
         max-width: 920px;
     }
+    @media (max-width: 991px) {
+        align-items: center;
+    };
     @media (min-width: 769px) and (max-width: 991px) {
         max-width: 750px;
     }
     @media (min-width: 576px) and (max-width: 768px) {
         max-width: 550px;
     }
-    @media (max-width: 575px) {
-        align-items: center;
-    };
     @media (min-width: 400px) and (max-width: 575px) {
         max-width: 382px;
     };

@@ -20,16 +20,24 @@ const HeaderSection = styled.section`
     font-family: ${themeFont.family};
     border-radius: 0px 0px 40px 40px;
     margin-bottom: 144px;
-    > div{
-        display: flex;
-    }
-    @media (max-width: 575px) {
+    @media (min-width: 769px) and (max-width: 991px) {
+        padding-top:166px;
+        padding-bottom: 68px;
+    };
+    @media (min-width: 576px) and (max-width: 768px) {
         padding-top:106px;
         padding-bottom: 294px;
     };
+    @media (min-width: 400px) and (max-width: 575px) {
+        padding-top:106px;
+        padding-bottom: 294px;
+    };
+    @media (max-width: 399px) {
+        padding-top:106px;
+        padding-bottom: 244px;
+        margin-bottom:80px;
+    };
 `
-
-
 const LeftSection = styled.section`
     width: 50%;
     h1{
@@ -39,6 +47,9 @@ const LeftSection = styled.section`
     h2{
         width: 350px;
         margin-bottom: 40px;
+        @media (max-width: 399px) {
+            width: 240px;
+        };
     }
     button{
         width: 300px;
@@ -47,7 +58,7 @@ const LeftSection = styled.section`
             padding: 15px 0 14px;
         }
     }
-    @media (max-width: 575px) {
+    @media (max-width: 768px) {
         width:100%;
         display:flex;
         flex-direction:column;
@@ -60,7 +71,7 @@ const LeftSection = styled.section`
 const RightSection = styled.section`
     width: 50%;
     position:relative;
-    @media (max-width: 575px) {
+    @media (max-width: 768px) {
         width:100%;
     };
 `

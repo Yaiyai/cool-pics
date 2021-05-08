@@ -15,7 +15,7 @@ const StyledButton = styled.button`
     font-weight: ${themeFont.weight.normal};
     font-size: ${themeFont.sizes.normal};
     box-sizing: border-box;
-    @media (max-width: 768px) {
+    @media (max-width: 991px) {
         padding-top:12px;
         padding-bottom:12px;
     }
@@ -41,7 +41,10 @@ const OutlinedButton = styled(StyledButton)`
     border: 1px solid #111111;
     padding-top:17px;
     padding-bottom:18px;
-
+    @media (max-width: 575px) {
+        padding-top:14px;
+        padding-bottom:15px;
+    }
     &:hover{
         background-color: black;
         color: white;
