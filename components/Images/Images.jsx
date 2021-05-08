@@ -37,14 +37,26 @@ const ActionGroup = styled.article`
     display:flex;
     align-items: center;
     padding: 39px 0 40px;
-    button{
-        margin-right: 16px;
-        width:140px;
-        @media (max-width: 768px) {
-            width: 118px;
-            margin-right:14px;
-            &:last-of-type{
-                margin-right: 0;
+    width:100%;
+    .btn-group{
+        @media (max-width: 399px) {
+            width: 100%;
+            display:flex;
+            flex-direction:column;
+        }
+        button{
+            margin-right: 16px;
+            width:140px;
+            @media (min-width: 400px) and (max-width: 768px) {
+                width: 118px;
+                margin-right:14px;
+                &:last-of-type{
+                    margin-right: 0;
+                }
+            }
+            @media (max-width: 399px) {
+                width: 100%;
+                margin-bottom: 12px;
             }
         }
     }
@@ -52,6 +64,10 @@ const ActionGroup = styled.article`
         flex-direction:column;
         padding-bottom: 30px;
     }
+    @media (max-width: 399px) {
+        width: 100%;
+    }
+
 
 `
 
@@ -167,7 +183,7 @@ const Images = ({ allImages }) => {
 
                 <ActionGroup>
                     <SearchInput placeholder='Search by author' inputChange={ handleInputChange } iconSubmit={ handleSubmit } keySubmit={ handleKeySubmit } />
-                    <div>
+                    <div className="btn-group">
                         <Button active={ currentStyle === 'color' } literal="Color" method={ changePicStyleToColor } buttonStyle="secondary" />
                         <Button active={ currentStyle === 'grayscale' } literal="Grayscale" method={ changePicStyleToGray } buttonStyle="secondary" />
                         <Button active={ currentStyle === 'blur' } literal="Blur" method={ changePicStyleToBlur } buttonStyle="secondary" />
@@ -176,13 +192,15 @@ const Images = ({ allImages }) => {
 
                 <Grid>
                     { imagesState?.imagesToShow?.length ?
-                        (imagesState?.imagesToShow?.map((pic, idx) => <ImageCard
-                            key={ pic.order }
-                            picId={ pic.order }
-                            author={ pic.author }
-                            imageUrl={ pic.url }
-                            style={ currentStyle }
-                        />
+                        (imagesState?.imagesToShow?.map((pic, idx) => (
+                            <ImageCard
+                                key={ pic.order }
+                                picId={ pic.order }
+                                author={ pic.author }
+                                imageUrl={ pic.url }
+                                style={ currentStyle }
+                            />
+                        )
                         )) : (
                             <Message literal='Oops! Nothing to show here!' />
                         )

@@ -24,11 +24,13 @@ const StyledContainerImages = styled.section`
         max-width: 550px;
     }
     @media (max-width: 575px) {
-        max-width: 382px;
         align-items: center;
     };
+    @media (min-width: 400px) and (max-width: 575px) {
+        max-width: 382px;
+    };
     @media (max-width: 399px) {
-        max-width: 300px;
+        max-width: 250px;
     };
 `
 

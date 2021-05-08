@@ -96,7 +96,7 @@ const StyledImageCard = styled.article`
     }
     @media (max-width: 399px) {
         width: 100%;
-        height:266px;
+        height:221px;
         margin-right:0;
     };
 `
